@@ -18,6 +18,7 @@ export async function POST(req: Request) {
             }
         })
         revalidatePath("/courses");
+        revalidatePath("/");
 
         
         return NextResponse.json(course);
