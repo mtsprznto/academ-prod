@@ -26,3 +26,6 @@ export const getHomeCourses = async (): Promise<(Course & { chapters: Chapter[] 
 
     }
 }
+
+export const dynamic = "force-dynamic";
+
