@@ -6,10 +6,9 @@ import axios from "axios";
 
 export default function SignInPage() {
   const { isSignedIn, user } = useUser();
-
-  if (isSignedIn !== false) {
-    useEffect(() => {
-      try {
+  useEffect(() => {
+    try {
+      if (isSignedIn !== false) {
         axios
           .post("/api/auth/register", {
             userId: user?.id,
@@ -20,11 +19,11 @@ export default function SignInPage() {
           .catch((error) => {
             console.error("Error al registrar usuario:", error);
           });
-      } catch (error) {
-        console.log("ERROR AXIOS", error);
       }
-    }, [isSignedIn, user]);
-  }
+    } catch (error) {
+      console.log("ERROR AXIOS", error);
+    }
+  }, [isSignedIn, user]);
 
   return (
     <div className="flex flex-col items-center justify-center gap-4 p-4">
