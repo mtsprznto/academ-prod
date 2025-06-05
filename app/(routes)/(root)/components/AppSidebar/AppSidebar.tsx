@@ -16,9 +16,27 @@ import {
 import Link from "next/link";
 import { routes, routesTeacher } from "./AppSidebar.data";
 import Image from "next/image";
+import { useEffect, useState } from "react";
+
 
 export function AppSidebar() {
   const { state } = useSidebar();
+  const [role, setRole] = useState<number | null>(null);
+
+  useEffect(() => {
+    async function fetchRole() {
+      try {
+        const response = await fetch("/api/users/getUserRole");
+        const data = await response.json();
+        setRole(data.role);
+        
+      } catch (error) {
+        console.error("Error obteniendo rol del usuario:", error);
+      }
+    }
+    fetchRole();
+  }, []);
+
   return (
     <Sidebar collapsible="icon">
       <SidebarContent className="bg-white">
@@ -30,7 +48,11 @@ export function AppSidebar() {
               width={30}
               height={30}
             ></Image>
-            {state === "expanded" ? <span className="text-xl font-semibold text-gray-800 tracking-wide">Academ.</span> : null}
+            {state === "expanded" ? (
+              <span className="text-xl font-semibold text-gray-800 tracking-wide">
+                Academ.
+              </span>
+            ) : null}
           </Link>
         </SidebarHeader>
         <SidebarGroup>
@@ -49,26 +71,28 @@ export function AppSidebar() {
               </SidebarMenuItem>
             ))}
           </SidebarMenu>
-          <SidebarMenu className="mt-4">
-            <SidebarGroupLabel>Teacher</SidebarGroupLabel>
-            <SidebarMenuItem>
-              <SidebarMenuSub>
-                {routesTeacher.map((item) => (
-                  <SidebarMenuSubItem key={item.title}>
-                    <SidebarMenuSubButton
-                      href={item.url}
-                      className="hover:bg-muted transition"
-                    >
-                      <div className="p-1 rounded-lg text-white bg-slate-400">
-                        <item.icon className="w-4 h-4" />
-                      </div>
-                      {item.title}
-                    </SidebarMenuSubButton>
-                  </SidebarMenuSubItem>
-                ))}
-              </SidebarMenuSub>
-            </SidebarMenuItem>
-          </SidebarMenu>
+          {role !== 2 && (
+            <SidebarMenu className="mt-4">
+              <SidebarGroupLabel>Teacher</SidebarGroupLabel>
+              <SidebarMenuItem>
+                <SidebarMenuSub>
+                  {routesTeacher.map((item) => (
+                    <SidebarMenuSubItem key={item.title}>
+                      <SidebarMenuSubButton
+                        href={item.url}
+                        className="hover:bg-muted transition"
+                      >
+                        <div className="p-1 rounded-lg text-white bg-slate-400">
+                          <item.icon className="w-4 h-4" />
+                        </div>
+                        {item.title}
+                      </SidebarMenuSubButton>
+                    </SidebarMenuSubItem>
+                  ))}
+                </SidebarMenuSub>
+              </SidebarMenuItem>
+            </SidebarMenu>
+          )}
         </SidebarGroup>
       </SidebarContent>
     </Sidebar>

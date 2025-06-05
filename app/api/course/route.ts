@@ -10,6 +10,19 @@ export async function POST(req: Request) {
         if (!userId) {
             return new NextResponse("Unauthorized", { status: 401 })
         }
+
+
+        // ✅ Verificar si el `userId` existe en la tabla `User`
+        const existingUser = await prisma.user.findUnique({
+            where: { userId },
+        });
+        if (!existingUser) {
+            console.error("Error: El usuario no existe en la base de datos");
+            return new NextResponse("User not found", { status: 404 });
+        }
+
+
+
         const course = await prisma.course.create({
             data: {
                 userId,
@@ -20,12 +33,12 @@ export async function POST(req: Request) {
         revalidatePath("/courses");
         revalidatePath("/");
 
-        
+
         return NextResponse.json(course);
 
 
     } catch (error) {
         console.log(error);
-        return new NextResponse("Internal error", {status:500})
+        return new NextResponse("Internal error", { status: 500 })
     }
 }

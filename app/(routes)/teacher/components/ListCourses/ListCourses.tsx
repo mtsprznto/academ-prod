@@ -4,8 +4,9 @@ import { ListCoursesProps } from "./ListCourses.types";
 export function ListCourses(props: ListCoursesProps) {
   const { courses } = props;
   if (courses.length === 0) {
-    return <p>No courses created</p>;
+    return <p className="px-7">No courses created 🔍</p>;
   }
+  
   return (
     <div className="flex flex-col my-4 mx-6 border rounded-lg bg-white p-4 gap-10">
       {courses.map((course) => (

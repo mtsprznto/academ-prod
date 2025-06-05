@@ -5,6 +5,8 @@ import { useRouter } from "next/navigation";
 
 export function ExploreCourses() {
   const router = useRouter();
+  
+
   return (
     <div className="my-4 mx-6 border rounded-lg bg-white">
       <div className="grid grid-cols-1 md:grid-cols-[60%_40%] gap-4">

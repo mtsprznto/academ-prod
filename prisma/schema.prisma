@@ -2,9 +2,33 @@ generator client {
   provider = "prisma-client-js"
 }
 
+generator db {
+  provider = "node"
+  seed     = "prisma/seed.ts"
+}
+
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String          @id @default(uuid())
+  userId    String          @unique
+  createdAt DateTime        @default(now())
+  updatedAt DateTime        @updatedAt
+  role_id   Int
+  courses   Course[]
+  purchases Purchase[]
+  stripe    StripeCustomer?
+  role      Role            @relation(fields: [role_id], references: [id], onDelete: Cascade)
+  progress  UserProgress[]
+}
+
+model Role {
+  nombre_rol String @unique
+  id         Int    @id @default(2)
+  users      User[]
 }
 
 model Course {
@@ -21,6 +45,7 @@ model Course {
   createdAt   DateTime   @default(now())
   updatedAt   DateTime   @updatedAt
   chapters    Chapter[]
+  user        User       @relation(fields: [userId], references: [userId], onDelete: Cascade)
   purchases   Purchase[]
 }
 
@@ -49,6 +74,7 @@ model UserProgress {
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
   chapter     Chapter  @relation(fields: [chapterId], references: [id], onDelete: Cascade)
+  User        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([userId, chapterId])
   @@index([chapterId])
@@ -62,6 +88,7 @@ model Purchase {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   course    Course   @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  User      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([userId, courseId])
   @@index([courseId])
@@ -73,4 +100,5 @@ model StripeCustomer {
   stripeCustomerId String
   createdAt        DateTime @default(now())
   updatedAt        DateTime @updatedAt
+  User             User     @relation(fields: [userId], references: [id])
 }
