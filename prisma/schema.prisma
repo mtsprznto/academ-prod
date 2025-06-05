@@ -2,10 +2,7 @@ generator client {
   provider = "prisma-client-js"
 }
 
-generator db {
-  provider = "node"
-  seed     = "prisma/seed.ts"
-}
+
 
 datasource db {
   provider = "postgresql"
