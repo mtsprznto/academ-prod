@@ -38,8 +38,7 @@ export function DownloadCertificate(props: DownloadCertificateProps) {
     <AlertDialog>
       <AlertDialogTrigger asChild>
         <Button className="cursor-pointer" variant={"outline"}>
-          Download certificate
-          <Download className="w-4 h-4 ml-2"></Download>
+          <Download className="w-4 h-4"></Download>
         </Button>
       </AlertDialogTrigger>
       <AlertDialogContent className="w-full !max-w-[900px]">
