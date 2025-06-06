@@ -25,7 +25,15 @@ export function InfoCourse(props: InfoCourseProps) {
         </div>
       )}
 
-      {videoUrl && <VideoCourse videoUrl={videoUrl}></VideoCourse>}
+     
+
+      {videoUrl && (
+        <VideoCourse
+          videoUrl={videoUrl}
+          courseId={infoCourse.id} // ✅ Pasar el ID del curso
+          chapterId={chapterCourseId} // ✅ Pasar el ID del capítulo
+        />
+      )}
 
       <ProgressCourse
         userProgress={userProgress}
@@ -38,7 +46,7 @@ export function InfoCourse(props: InfoCourseProps) {
         <div className="w-fit mb-4 px-2 py-1 bg-violet-400 text-white rounded-full text-xs shadow-md">
           {category}
         </div>
-        
+
         <p className="text-gray-600 text-sm">{description}</p>
       </div>
     </div>

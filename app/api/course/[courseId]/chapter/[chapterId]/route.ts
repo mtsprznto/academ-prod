@@ -8,22 +8,33 @@ export async function PATCH(
 ) {
     try {
         const { userId } = await auth();
-        const { courseId, chapterId } = await params;
-        const values = await req.json();
-
         if (!userId) {
             return new NextResponse("Unauthorized", { status: 401 })
         }
-        const course = await prisma.chapter.update({
-            where: {
-                id: chapterId,
-                courseId: courseId
-            },
-            data: {
-                ...values
-            }
-        })
-        return NextResponse.json(course)
+        const { courseId, chapterId } = await params;
+        const values = await req.json();
+
+        const { videoUrl, duration, courseData } = values;
+
+        if (!videoUrl || typeof duration !== "number") {
+            return new NextResponse("Invalid data", { status: 400 });
+        }
+        const updatedChapter = await prisma.chapter.update({
+            where: { id: chapterId, courseId },
+            data: { videoUrl, duration }
+        });
+
+
+        let updatedCourse = null;
+        if (courseData) {
+            updatedCourse = await prisma.course.update({
+                where: { id: courseId },
+                data: courseData // ✅ Guarda cualquier dato del curso recibido
+            });
+
+        }
+
+        return NextResponse.json({ updatedCourse, updatedChapter })
 
     } catch (error) {
         console.log(error);

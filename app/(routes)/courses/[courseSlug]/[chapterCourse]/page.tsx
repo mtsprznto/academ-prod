@@ -32,6 +32,8 @@ export default async function ChapterCoursePage({
     (chapter) => chapter.id === chapterCourse
   )?.videoUrl;
 
+  
+
   return (
     <div className="p-6">
       <div className="grid grid-cols-1 md:grid-cols-[65%_1fr] gap-4">
