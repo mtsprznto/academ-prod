@@ -33,3 +33,5 @@ DOCS STRIPE: https://docs.stripe.com/get-started/development-environment?lang=no
 
 
 Activar stripe: `stripe listen --forward-to localhost:3000/api/webhook`
+
+Para ejecutar el seeder: `node prisma/seed.js`
