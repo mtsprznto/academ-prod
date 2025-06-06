@@ -14,14 +14,19 @@ export async function PATCH(
         const { courseId, chapterId } = await params;
         const values = await req.json();
 
-        const { videoUrl, duration, courseData } = values;
+        const { videoUrl, duration, courseData, isPublished } = values;
 
-        if (!videoUrl || typeof duration !== "number") {
-            return new NextResponse("Invalid data", { status: 400 });
+        if ((videoUrl && !duration) || (duration && !videoUrl)) {
+            return new NextResponse("Invalid video data", { status: 400 });
         }
+
         const updatedChapter = await prisma.chapter.update({
             where: { id: chapterId, courseId },
-            data: { videoUrl, duration }
+            data: {
+                ...(videoUrl && { videoUrl }), 
+                ...(duration && { duration }), 
+                ...(isPublished !== undefined && { isPublished }) 
+            }
         });
 
 
@@ -29,7 +34,7 @@ export async function PATCH(
         if (courseData) {
             updatedCourse = await prisma.course.update({
                 where: { id: courseId },
-                data: courseData // ✅ Guarda cualquier dato del curso recibido
+                data: courseData 
             });
 
         }
