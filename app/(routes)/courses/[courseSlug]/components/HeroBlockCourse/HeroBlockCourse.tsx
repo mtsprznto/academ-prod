@@ -1,7 +1,7 @@
 "use client";
 import { useRouter } from "next/navigation";
 import { HeroBlockCourseProps } from "./HeroBlockCourse.types";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { IconBadge } from "@/components/Shared";
 import { Calendar, ChartNoAxesColumn, Timer } from "lucide-react";
 import { formatPrice } from "@/lib/formatPrice";

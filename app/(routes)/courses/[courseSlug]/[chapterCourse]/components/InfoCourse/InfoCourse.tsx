@@ -30,8 +30,6 @@ export function InfoCourse(props: InfoCourseProps) {
       {videoUrl && (
         <VideoCourse
           videoUrl={videoUrl}
-          courseId={infoCourse.id} // ✅ Pasar el ID del curso
-          chapterId={chapterCourseId} // ✅ Pasar el ID del capítulo
         />
       )}
 
