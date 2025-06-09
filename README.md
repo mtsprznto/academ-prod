@@ -1,7 +1,7 @@
 
 # 📚 Academ Online
 
-Nuestra plataforma es un entorno amigable para compartir conocimiento y aprender de manera organizada. Los usuarios pueden registrarse y acceder a diversas funcionalidades dependiendo de su rol dentro del sistema.
+Academ. plataforma es un entorno amigable para compartir conocimiento y aprender de manera organizada. Los usuarios pueden registrarse y acceder a diversas funcionalidades dependiendo de su rol dentro del sistema.
 
 🌟 Características Principales
 
