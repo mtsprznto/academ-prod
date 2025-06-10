@@ -17,25 +17,27 @@ import Link from "next/link";
 import { routes, routesTeacher } from "./AppSidebar.data";
 import Image from "next/image";
 import { useEffect, useState } from "react";
-
+import { useUser } from "@clerk/nextjs";
 
 export function AppSidebar() {
   const { state } = useSidebar();
   const [role, setRole] = useState<number | null>(null);
+  const { user, isLoaded } = useUser();
+ 
 
   useEffect(() => {
+    if (!isLoaded || !user) return;
     async function fetchRole() {
       try {
         const response = await fetch("/api/users/getUserRole");
         const data = await response.json();
         setRole(data.role);
-        
       } catch (error) {
         console.error("Error obteniendo rol del usuario:", error);
       }
     }
     fetchRole();
-  }, []);
+  }, [isLoaded, user]);
 
   return (
     <Sidebar collapsible="icon">

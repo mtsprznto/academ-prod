@@ -45,11 +45,12 @@ export function DownloadCertificate(props: DownloadCertificateProps) {
         <AlertDialogHeader>
           <AlertDialogTitle>Download your certificate</AlertDialogTitle>
           <AlertDialogDescription asChild>
-            <Certificate
+            <p>En proceso...</p>
+            {/* <Certificate
               certRef={certRef}
               userName={userName}
               titleCourse={titleCourse}
-            ></Certificate>
+            ></Certificate> */}
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
