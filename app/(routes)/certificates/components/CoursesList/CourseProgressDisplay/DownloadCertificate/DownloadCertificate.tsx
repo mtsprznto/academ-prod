@@ -17,10 +17,9 @@ import {
 import { Button } from "@/components/ui/button";
 
 import { DownloadCertificateProps } from "./DownloadCertificate.types";
-import { Certificate } from "./Certificate";
 
 export function DownloadCertificate(props: DownloadCertificateProps) {
-  const { titleCourse, userName } = props;
+  const { titleCourse } = props;
 
   const certRef = useRef<HTMLDivElement>(null);
   const handleDownload = async () => {
