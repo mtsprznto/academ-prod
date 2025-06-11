@@ -1,71 +1,66 @@
+# 🎓 Academ. – Plataforma de Aprendizaje en Línea  
 
-# 📚 Academ Online
+Academ. es una plataforma diseñada para ofrecer **cursos educativos** a estudiantes y gestionar roles como **miembros y profesores**. Su enfoque permite una experiencia estructurada y dinámica para el aprendizaje.  
 
-Academ. plataforma es un entorno amigable para compartir conocimiento y aprender de manera organizada. Los usuarios pueden registrarse y acceder a diversas funcionalidades dependiendo de su rol dentro del sistema.
+## 🌟 Características Principales  
 
-🌟 Características Principales
+### 🏆 Roles en la Plataforma  
+- **Miembro**: Usuarios registrados que pueden explorar y comprar cursos.  
+- **Profesor**: Usuarios con permisos adicionales para **crear y gestionar cursos**, además de **acceder a analíticas** de sus cursos.  
 
-- Home: Vista general con información destacada sobre los cursos disponibles.
-- Courses: Listado de cursos en la plataforma, accesibles para todos los miembros.
-- My Courses: Espacio donde los miembros pueden ver los cursos que han adquirido.
-- Orders: Sección para gestionar pedidos y visualizar el historial de compras.
-- Certificates: Panel donde los estudiantes pueden descargar sus certificados tras completar cursos.
+### 📚 Funcionalidades Clave  
+- **Home**: Página principal con información destacada sobre los cursos.  
+- **Courses**: Listado de cursos disponibles.  
+- **My Courses**: Sección donde los usuarios pueden ver los cursos adquiridos.  
+- **Orders**: Gestión de pedidos y visualización del historial de compras.  
+- **Certificates**: Descarga de certificados tras completar cursos.  
 
-🎓 Roles en la plataforma
+### 💳 Gestión de Pagos  
+- **Integración con Stripe** para procesar pagos de manera segura.  
+- Uso de **webhooks** para actualizar el estado de los pedidos en la base de datos tras completar una compra.  
 
-- Miembro: Cualquier usuario registrado comienza con este rol, con acceso a la navegación y compra de cursos.
-- Profesor: Asignado por un administrador, permite acceso adicional a:
-- Panel "Courses": Creación y gestión de cursos y capítulos.
-- Analíticas: Información sobre el desempeño de sus cursos y cantidad de alumnos inscritos.
+### 📊 Analíticas  
+- **Visualización de métricas** como ingresos totales y suscriptores recientes mediante gráficos interactivos.  
 
-💳 Pago y gestión de compras
+## 🛠️ Tecnologías Utilizadas  
+- **Next.js** – Framework principal para el desarrollo del **frontend y backend**.  
+- **Clerk** – Gestión de **autenticación y usuarios**.  
+- **Prisma** – ORM para interactuar con la base de datos **PostgreSQL (Neon)**.  
+- **Stripe** – Procesamiento de pagos y gestión de suscripciones.  
+- **Tailwind CSS** – Estilización de la interfaz.  
+- **Radix UI** – Componentes accesibles y personalizables.  
+- **Recharts** – Gráficos interactivos para mostrar datos analíticos.  
 
-Utilizamos Stripe para procesar pagos de manera segura:
-- Los alumnos acceden al checkout.
-- Se redirigen a la pasarela de pago.
-- Al finalizar la compra, Stripe se comunica con nuestro sistema mediante webhooks.
-- Se actualiza el estado del pedido en la base de datos.
+## 🏗️ Estructura del Proyecto  
+El código está organizado en diferentes carpetas para mejorar la **modularidad** y **escalabilidad**:  
 
+- **`app/`** – Contiene las rutas principales de la aplicación, como cursos, analíticas y gestión de profesores.  
+- **`components/`** – Componentes reutilizables como gráficos, formularios y botones.  
+- **`lib/`** – Librerías personalizadas, como la configuración de **Stripe y Prisma**.  
+- **`prisma/`** – Archivos relacionados con el esquema de la **base de datos**.  
+- **`api/`** – Endpoints para manejar operaciones como registro de usuarios, progreso en cursos y webhooks de **Stripe**.  
 
+## 🚀 Flujo de Usuario  
 
-🛠️ Tecnologías Utilizadas
+### 🧑‍🎓 Estudiantes  
+1. **Registrarse** en la plataforma.  
+2. **Navegar** por los cursos disponibles.  
+3. **Comprar cursos** (gratis o de pago).  
+4. **Acceder al contenido** del curso y completar capítulos.  
+5. **Descargar certificados** al finalizar.  
 
-Nuestra academia online está desarrollada con herramientas modernas para garantizar seguridad, escalabilidad y una excelente experiencia de usuario.
+### 👨‍🏫 Profesores  
+1. **Crear y editar cursos**.  
+2. **Gestionar capítulos y contenido**.  
+3. **Analizar el desempeño** de sus cursos mediante métricas.  
 
-- Clerk – Gestión de autenticación y usuarios.
-- ShadCN UI – Framework de UI basado en Radix y Tailwind para construir interfaces limpias y funcionales.
-- Shipfa Fast – Generación rápida de logos y branding.
-- Neon – Base de datos PostgreSQL en la nube con escalabilidad automática.
-- Prisma – ORM avanzado para la gestión de la base de datos y consultas eficientes.
+## 🛠️ Scripts Importantes  
+- `npm run dev` – Inicia el entorno de desarrollo.  
+- `npm run build` – Construye la aplicación para producción.  
+- `stripe listen --forward-to localhost:3000/api/webhook` – Activa el webhook de **Stripe** para pruebas locales.  
 
+---
 
-🚀 Inicio del Proyecto
-Antes de ejecutar la plataforma, asegúrate de instalar las dependencias necesarias:
-
-~~~
-npm install
-# or
-yarn install
-# or
-pnpm install
-~~~
-
-Luego, puedes iniciar el entorno de desarrollo con:
-
-~~~
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-~~~
-
-
-
-
---------------------------
 
 https://stripe.com/es
 
