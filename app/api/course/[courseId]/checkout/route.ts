@@ -5,6 +5,11 @@ import { NextResponse } from "next/server";
 
 import { stripe } from "@/lib/stripe";
 
+
+/*
+STRIPE ENPOINT CHECKOUT
+*/
+
 export async function POST(req: Request, { params }: { params: Promise<{ courseId: string }> }) {
 
     const { userId } = await auth();
@@ -95,7 +100,7 @@ export async function POST(req: Request, { params }: { params: Promise<{ courseI
                 price: course.price ? course.price.toString() : "0"
             },
         });
-        
+
 
         return NextResponse.json({ url: session.url })
 

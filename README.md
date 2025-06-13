@@ -16,8 +16,17 @@ Academ. es una plataforma diseñada para ofrecer **cursos educativos** a estudia
 - **Certificates**: Descarga de certificados tras completar cursos.  
 
 ### 💳 Gestión de Pagos  
+
+#### Stripe
+
 - **Integración con Stripe** para procesar pagos de manera segura.  
 - Uso de **webhooks** para actualizar el estado de los pedidos en la base de datos tras completar una compra.  
+
+#### Mercado Pago
+
+- **Integración con Mercado pago**
+
+
 
 ### 📊 Analíticas  
 - **Visualización de métricas** como ingresos totales y suscriptores recientes mediante gráficos interactivos.  

@@ -29,6 +29,7 @@ export function HeroBlockCourse(props: HeroBlockCourseProps) {
 
   const router = useRouter();
 
+  // stripe
   const enrollCourse = async () => {
     setIsLoading(true);
     if (price === "Free") {
@@ -55,6 +56,39 @@ export function HeroBlockCourse(props: HeroBlockCourseProps) {
       }
     }
   };
+
+  // Mercado pago
+
+  const enrollCourseMP = async () => {
+    setIsLoading(true);
+    if (price === "Free") {
+      try {
+        await axios.post(`/api/course/${id}/enroll`);
+        toast("Successful registration 🎉");
+        router.push(`/courses/${slug}/${chapters[0].id}`);
+      } catch (error) {
+        console.log(error);
+        toast.error("Error subscribing ❌");
+      } finally {
+        setIsLoading(true);
+      }
+    } else {
+      try {
+        const response = await axios.post(`/api/course/${id}/mercadopago`, {
+          title,
+          price: parseFloat(price!),
+        });
+
+        window.location.assign(response.data.url);
+      } catch (error) {
+        toast.error("Error when registering ❌");
+        console.log(error);
+      } finally {
+        setIsLoading(false);
+      }
+    }
+  };
+
   const redirectToCourse = () => {
     router.push(`/courses/${slug}/${chapters[0].id}`);
   };
@@ -87,13 +121,22 @@ export function HeroBlockCourse(props: HeroBlockCourseProps) {
             View course
           </Button>
         ) : (
-          <Button
-            onClick={enrollCourse}
-            className="hover:bg-violet-400 text-white font-semibold cursor-pointer"
-            disabled={isLoading}
-          >
-            Register now
-          </Button>
+          <div className="flex gap-2">
+            <Button
+              onClick={enrollCourse}
+              className="hover:bg-violet-400 text-white font-semibold cursor-pointer"
+              disabled={isLoading}
+            >
+              Register now
+            </Button>
+            <Button
+              onClick={enrollCourseMP}
+              className="hover:bg-violet-400 text-white font-semibold cursor-pointer"
+              disabled={isLoading}
+            >
+              Register now MP
+            </Button>
+          </div>
         )}
       </div>
       <Image

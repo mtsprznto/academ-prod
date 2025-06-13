@@ -3,6 +3,10 @@ import { auth } from "@clerk/nextjs/server";
 
 import { NextResponse } from "next/server";
 
+/*
+STRIPE ENDPOINT ENROLL
+*/
+
 export async function POST(req: Request, { params }: { params: Promise<{ courseId: string }> }) {
 
 

@@ -8,16 +8,17 @@ datasource db {
 }
 
 model User {
-  id        String          @id @default(uuid())
-  userId    String          @unique
-  createdAt DateTime        @default(now())
-  updatedAt DateTime        @updatedAt
-  role_id   Int
-  courses   Course[]
-  purchases Purchase[]
-  stripe    StripeCustomer?
-  role      Role            @relation(fields: [role_id], references: [id], onDelete: Cascade)
-  progress  UserProgress[]
+  id                  String               @id @default(uuid())
+  userId              String               @unique
+  createdAt           DateTime             @default(now())
+  updatedAt           DateTime             @updatedAt
+  role_id             Int
+  courses             Course[]
+  purchases           Purchase[]
+  stripe              StripeCustomer?
+  role                Role                 @relation(fields: [role_id], references: [id], onDelete: Cascade)
+  progress            UserProgress[]
+  MercadoPagoCustomer MercadoPagoCustomer?
 }
 
 model Role {
@@ -97,4 +98,13 @@ model StripeCustomer {
   createdAt        DateTime @default(now())
   updatedAt        DateTime @updatedAt
   User             User     @relation(fields: [userId], references: [userId])
+}
+
+model MercadoPagoCustomer {
+  id                    String   @id @default(uuid())
+  userId                String   @unique
+  mercadoPagoCustomerId String   @unique
+  createdAt             DateTime @default(now())
+  updatedAt             DateTime @updatedAt
+  User                  User     @relation(fields: [userId], references: [userId], onDelete: Cascade)
 }
